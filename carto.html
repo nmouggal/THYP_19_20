@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cartographie</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+	<script src="https://www.amcharts.com/lib/4/geodata/worldHigh.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+  <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html"><span id ="firstLettre">Carto</span><span style="color:black" id="suiteLettre">graphie</span></a>
+		  <a>Carte des pays que Nisrin Mouggal a visité</a>
+
+	    </div>
+	  </nav>
+	  <section class="hero-wrap js-fullheight">
+      <div class="overlay"></div>
+     
+      </div>
+    </section>
+
+
+
+    <section class="ftco-section ftco-no-pb goto-here" id="resume-section">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-md-3">
+
+					</div>
+					<div class="col-md-9">
+					  <div id="page-1" class= "page one">
+
+						  <style>
+								#chartdiv {
+								  width: 100%;
+								  height: 500px;
+								}
+								</style>
+								<div id="chartdiv"></div>
+					  <div id="page-4" class= "page four">
+
+           
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+
+<script>
+  
+am4core.ready(function() {
+am4core.useTheme(am4themes_animated);
+var chart = am4core.create("chartdiv", am4maps.MapChart);
+chart.geodata = am4geodata_worldLow;
+chart.projection = new am4maps.projections.Miller();
+chart.exporting.menu = new am4core.ExportMenu();
+chart.zoomControl = new am4maps.ZoomControl();
+
+var homeButton = new am4core.Button();
+homeButton.events.on("hit", function() {
+  chart.goHome();
+});
+
+homeButton.icon = new am4core.Sprite();
+homeButton.padding(7, 5, 7, 5);
+homeButton.width = 30;
+homeButton.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
+homeButton.marginBottom = 10;
+homeButton.parent = chart.zoomControl;
+homeButton.insertBefore(chart.zoomControl.plusButton);
+
+chart.homeZoomLevel = 3.5;
+chart.homeGeoPoint = { longitude: 10, latitude: 52 };
+
+var groupData = [
+  {
+    "name": "Pays visité 1 fois",
+    "color": chart.colors.getIndex(0),
+    "data": [
+      {
+        "title": "Espagne",
+        "id": "ES", 
+        "customData": "1"
+      },
+	  {
+        "title": "Italie",
+        "id": "IT",
+        "customData": "1"
+      },
+	  {
+        "title": "Allemagne",
+        "id": "DE",
+        "customData": "1"
+      }, 
+    ]
+  },
+  {
+    "name": "Pays visité 2 fois",
+    "color": chart.colors.getIndex(1),
+    "data": [
+    ]
+  },
+  {
+    "name": "Pays visité plus de 3 fois ou plus",
+    "color": chart.colors.getIndex(3),
+    "data": [
+      {
+        "title": "Algerie",
+        "id": "DZA",
+        "customData": "plus de 3"
+      },
+      {
+        "title": "France",
+        "id": "FR",
+        "customData": "Plus de 3 "
+      },
+    ]
+  }
+];
+
+var excludedCountries = ["AQ"];
+
+groupData.forEach(function(group) {
+  var series = chart.series.push(new am4maps.MapPolygonSeries());
+  series.name = group.name;
+  series.useGeodata = true;
+  var includedCountries = [];
+  group.data.forEach(function(country) {
+    includedCountries.push(country.id);
+    excludedCountries.push(country.id);
+  });
+  series.include = includedCountries;
+
+  series.fill = am4core.color(group.color);
+
+  series.setStateOnChildren = true;
+  series.calculateVisualCenter = true;
+
+  var mapPolygonTemplate = series.mapPolygons.template;
+  mapPolygonTemplate.fill = am4core.color(group.color);
+  mapPolygonTemplate.fillOpacity = 0.8;
+  mapPolygonTemplate.nonScalingStroke = true;
+  mapPolygonTemplate.tooltipPosition = "fixed"
+
+
+  mapPolygonTemplate.events.on("out", function(event) {
+    series.mapPolygons.each(function(mapPolygon) {
+      mapPolygon.isHover = false;
+    })
+  })
+ 
+  var hoverState = mapPolygonTemplate.states.create("hover");
+  hoverState.properties.fill = am4core.color("#CC0000");
+
+  mapPolygonTemplate.tooltipText = "{title} visité {customData} fois"; 
+  series.data = JSON.parse(JSON.stringify(group.data));
+});
+
+var worldSeries = chart.series.push(new am4maps.MapPolygonSeries());
+var worldSeriesName = "world";
+worldSeries.name = worldSeriesName;
+worldSeries.useGeodata = true;
+worldSeries.exclude = excludedCountries;
+worldSeries.fillOpacity = 0.8;
+worldSeries.hiddenInLegend = true;
+worldSeries.mapPolygons.template.nonScalingStroke = true;
+worldSeries.mapPolygons.template.tooltipText = "{name}";
+
+chart.legend = new am4maps.Legend();
+
+chart.legend.paddingLeft = 27;
+chart.legend.paddingRight = 27;
+chart.legend.marginBottom = 15;
+chart.legend.width = am4core.percent(90);
+chart.legend.valign = "bottom";
+chart.legend.contentAlign = "left";
+
+chart.legend.itemContainers.template.interactionsEnabled = false;
+
+}); 
+</script>
+   
+  </body>
+</html>
