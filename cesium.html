@@ -1,0 +1,74 @@
+<html>
+
+    <head>
+        <title>Cesium</title>
+        <script type="text/javascript" src="js/cesuim/Apps/Sandcastle/Sandcastle-header.js"></script>
+        <script type="text/javascript" src="js/cesuim/Build/CesiumUnminified/Cesium.js" ></script>
+    </head>
+
+    <style>
+        @import url(js/cesuim/Apps/Sandcastle/templates/bucket.css);
+    </style>
+    
+    <div id="cesiumContainer" class="fullSize"></div>
+    <div id="loadingOverlay"><h1>Loading...</h1></div>
+    <div id="toolbar"></div>
+    
+
+    <script id="cesium_sandcastle_script">
+    
+       Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZGY1ODE0OC1hZjU1LTRlYzktOTBlNS0xMzU2MTg1ZjZiNjYiLCJpZCI6MTc3ODEsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NzI4MjA0MjF9.-gFzsOq7yv7FroZpw1tSwyl_Y-qxztDbjYurKalZON0';     
+        var viewer = new Cesium.Viewer('cesiumContainer');
+        
+        
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/Tunisie.json', {
+            stroke: Cesium.Color.RED,
+            fill: Cesium.Color.RED.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+        
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/France.json', {
+            stroke: Cesium.Color.RED,
+            fill: Cesium.Color.RED.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+        
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/Belgium.json', {
+            stroke: Cesium.Color.LIGHTSKYBLUE,
+            fill: Cesium.Color.LIGHTSKYBLUE.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+        
+        
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/netherlands.topojson', {
+            stroke: Cesium.Color.LIGHTSKYBLUE,
+            fill: Cesium.Color.LIGHTSKYBLUE.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/Poland.json', {
+            stroke: Cesium.Color.GOLD,
+            fill: Cesium.Color.GOLD.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+       
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('js/cesuim/visitedCountries/Germany.json', {
+            stroke: Cesium.Color.WHITE,
+            fill: Cesium.Color.GOLD.withAlpha(0.5),
+            strokeWidth: 3
+        }));
+        
+        
+    </script>
+
+    <div style="background-color: yellow; width: 80px; height: 30px; position: relative; margin: 2%;display:flex ;justify-content: flex-end ; border-radius: 40px">
+    <span style="color: black ; font-weight: 600; ; text-align: center;"> Visiter une fois</span></div>
+
+    <div style="background-color:#36F9E4 ; width: 80px; height: 30px; position: relative; margin: 2%;display:flex;justify-content: flex-end; border-radius: 40px">
+    <span style="color: white ; font-weight: 600; text-align: center;"> Visiter deux fois</span></div>
+       
+     
+    <div style="background-color: red; width: 80px; height: 30px; position: relative; margin: 2%;display:flex;justify-content: flex-end ; border-radius: 40px">
+    <span style="color: black ; font-weight: 600; text-align: center;"> Visiter +Trois fois</span></div>
+    
+    
+</html>
