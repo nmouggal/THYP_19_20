@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Statistiques</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+</head>
+<body>
+<div class="container">
+        <div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
+          <div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
+          	<div class="text text-center">
+		  				<h1 id ="titre">Statistique Global</h1> <h1 id="nameM2">THYP 2019</h1>
+							</div>
+            </div>
+          </div>
+        </div>
+
+
+	
+
+	<div class="dropdown" style="display: inline-block;">
+		<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+			Selectionner un besoin dans la liste
+		</button>
+		<div class="dropdown-menu type">
+			<a href="#" class= "dropdown-item" id= "competence">Competence</a>
+			<a href="#" class= "dropdown-item" id= "besoins">Besoins</a>
+		</div>
+	</div>
+	<div class="dropdown" style="display: inline-block;">
+		<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+			Etudiants
+		</button>
+		<div class="dropdown-menu etudiants">
+		</div>
+	</div>
+
+	
+
+
+
+		<section id="#">
+			<div class="container">
+			<div class="row">
+                            <div class="col-3">
+                                    <h3>Je suis expert(e)</h3>
+                                    <div class="list-group" id="competence1" role="tablist">
+                                            <!--
+                                            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                                            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                                            -->
+                                    </div>
+                            </div>
+        
+                            <div class="col-3">
+                                <h3>Je connais bien</h3>
+                                    <div class="list-group" id="competence2" role="tablist">
+                                            <!--
+                                            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                                            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                                            -->
+                                    </div>
+                            </div>
+        
+                            <div class="col-3">
+                                    <h3>Je connais un peu</h3>
+                                        <div class="list-group" id="competence3" role="tablist">
+                                                <!--
+                                                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                                                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                                                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                                                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                                                -->
+                                        </div>
+                                </div>
+
+                                <div class="col-3">
+                                        <h3>Je ne connais pas du tout</h3>
+                                            <div class="list-group" id="competence4" role="tablist">
+                                                    <!--
+                                                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                                                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                                                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                                                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                                                    -->
+                                            </div>
+                                    </div>
+                        </div>
+
+			<div id="chart-wrapper">
+				<canvas id="chart"></canvas>
+			</div>
+			<div id="footer">
+				<div class="left" ><a href="" target="_blank"></a></div>
+			</div>
+			</div>
+		</section>
+	</body>
+	</html>
+
+
+	<script src="script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+	<script type="text/javascript">
+		
+
+	</script>
